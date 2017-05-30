@@ -272,6 +272,7 @@ def applyIsochores(segments, annotations, workspaces,
 
         E.info("truncating workspace to annotations")
         annotations.merge()
+        annotations["merged"].normalize()
         workspace.intersect(annotations["merged"])
         del annotations["merged"]
 
@@ -431,7 +432,7 @@ def outputMetrics(outfile, segments, workspace, track, section):
     .'''
 
     stats_per_isochore = []
-    for isochore, ss in segments.iteritems():
+    for isochore, ss in segments.items():
         stats = SegmentsSummary()
         stats.update(ss, workspace[isochore])
         stats_per_isochore.append(stats)
